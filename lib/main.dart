@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:frist_app/gradient_container.dart';
+import 'package:frist_app/start_screen.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.cyan,
-        body: GradientContainer(),
+    MaterialApp(
+      home: SafeArea(
+        child: Scaffold(
+          body: Container(
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 108, 195, 242),
+            ),
+            child: const StartScreen(),
+          ),
+        ),
       ),
     ),
   );
