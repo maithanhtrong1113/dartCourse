@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frist_app/aswer_button.dart';
 import 'package:frist_app/data/question.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({super.key});
@@ -11,22 +12,35 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreen extends State<QuestionScreen> {
+  var currenQuestionIndex = 0;
+  void answerQuestionNext() {
+    setState(() {
+      currenQuestionIndex++;
+    });
+  }
+
   @override
   Widget build(context) {
-    final currentQuestion = questions[0];
-    return Center(
+    final currentQuestion = questions[currenQuestionIndex];
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
             child: Text(
               currentQuestion.text,
-              style: const TextStyle(color: Colors.white, fontSize: 20),
+              textAlign: TextAlign.center,
+              style: GoogleFonts.sansitaSwashed(
+                  color: const Color.fromARGB(255, 223, 95, 138),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
             ),
           ),
-          ...currentQuestion.answers
-              .map((answer) => AnswerButton(aswerText: answer, onTap: () {}))
+          ...currentQuestion.getShuffedAnswers().map((answer) =>
+              AnswerButton(aswerText: answer, onTap: answerQuestionNext))
         ],
       ),
     );
