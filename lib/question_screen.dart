@@ -25,25 +25,8 @@ class _QuestionScreen extends State<QuestionScreen> {
               style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          AnswerButton(aswerText: currentQuestion.answers[0], onTap: () {}),
-          const SizedBox(
-            height: 15,
-          ),
-          AnswerButton(aswerText: currentQuestion.answers[1], onTap: () {}),
-          const SizedBox(
-            height: 15,
-          ),
-          AnswerButton(aswerText: currentQuestion.answers[2], onTap: () {}),
-          const SizedBox(
-            height: 15,
-          ),
-          AnswerButton(aswerText: currentQuestion.answers[3], onTap: () {}),
-          const SizedBox(
-            height: 15,
-          ),
+          ...currentQuestion.answers
+              .map((answer) => AnswerButton(aswerText: answer, onTap: () {}))
         ],
       ),
     );

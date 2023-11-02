@@ -10,21 +10,30 @@ class AnswerButton extends StatelessWidget {
   final void Function() onTap;
   @override
   Widget build(context) {
-    return TextButton(
-      onPressed: onTap,
-      style: TextButton.styleFrom(
-        backgroundColor: Colors.amber,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(40),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-      ),
-      child: Text(
-        aswerText,
-        style: const TextStyle(
-          fontSize: 20,
-          color: Colors.white,
-        ),
+    return Center(
+      child: Column(
+        children: [
+          TextButton(
+            onPressed: onTap,
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.amber,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+            ),
+            child: Text(
+              aswerText,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+        ],
       ),
     );
   }
