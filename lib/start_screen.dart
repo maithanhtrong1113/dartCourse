@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:frist_app/data/questions.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen(this.startQuiz, {super.key});
+
   final void Function() startQuiz;
 
   @override
@@ -13,25 +16,36 @@ class StartScreen extends StatelessWidget {
           Image.asset(
             'assets/images/quiz-logo.png',
             width: 300,
-            color: const Color.fromARGB(100, 255, 255, 255),
+            color: const Color.fromARGB(150, 255, 255, 255),
           ),
+          // Opacity(
+          //   opacity: 0.6,
+          //   child: Image.asset(
+          //     'assets/images/quiz-logo.png',
+          //     width: 300,
+          //   ),
+          // ),
           const SizedBox(height: 80),
-          const Text(
-            'Learn Flutter by fun way !!',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          Text(
+            'Learn Flutter the fun way!',
+            style: GoogleFonts.lato(
+              color: const Color.fromARGB(255, 237, 223, 252),
+              fontSize: 24,
             ),
           ),
-          const SizedBox(height: 40),
-          OutlinedButton.icon(
-            onPressed: startQuiz,
-            style: OutlinedButton.styleFrom(foregroundColor: Colors.white),
-            icon: const Icon(Icons.arrow_right_outlined),
-            label: const Text(
-              'Start Quiz',
-              style: TextStyle(fontSize: 20),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: OutlinedButton.icon(
+              onPressed: startQuiz,
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
+              icon: const Icon(Icons.arrow_right_alt),
+              label: const Text(
+                'Start Quiz',
+                style: TextStyle(fontSize: 18),
+              ),
             ),
           )
         ],
