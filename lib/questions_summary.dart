@@ -63,7 +63,8 @@ class QuestionsSummary extends StatelessWidget {
                             'Correct Answer: ${data['correct_answer']}',
                             style: const TextStyle(
                                 color: Color.fromARGB(255, 10, 7, 190),
-                                fontSize: 18),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
