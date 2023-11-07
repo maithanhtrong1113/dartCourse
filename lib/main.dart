@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frist_app/expenses.dart';
+import 'package:frist_app/widget/expenses.dart';
 
 void main() {
   runApp(
-    const MaterialApp(
-      home: Expenses(),
+    MaterialApp(
+      theme: ThemeData(useMaterial3: true),
+      home: const Expenses(),
     ),
   );
 }
