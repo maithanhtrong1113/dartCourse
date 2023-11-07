@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:frist_app/gradient_container.dart';
+import 'package:frist_app/expenses.dart';
 
 void main() {
   runApp(
     const MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.cyan,
-        body: GradientContainer(),
-      ),
+      home: Expenses(),
     ),
   );
 }
