@@ -10,8 +10,12 @@ class ExpenseItem extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Container(
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 35, 151, 240)),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 35, 151, 240),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           child: Column(

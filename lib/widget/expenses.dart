@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frist_app/widget/expenses_list.dart';
 import 'package:frist_app/models/expense.dart';
+import 'package:frist_app/widget/new_expense.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -26,10 +27,17 @@ class _ExpensesState extends State<Expenses> {
       category: Category.leisure,
     ),
   ];
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
+  }
+
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) => const Text('Modal bottom sheet'),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
   }
 
