@@ -44,15 +44,28 @@ class _NewExpenseState extends State<NewExpense> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Invalid input'),
+          title: const Text(
+            'Invalid input',
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
           content: const Text(
-              'Please make sure a valid title, amount, date and category was entered.'),
+            'Please make sure a valid title, amount, date and category was entered!!!',
+            style: TextStyle(fontSize: 18),
+          ),
           actions: [
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(ctx);
               },
-              child: const Text('Okay'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+              ),
+              child: const Text(
+                'Okay',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -66,6 +79,7 @@ class _NewExpenseState extends State<NewExpense> {
           category: _selectedCategory,
           date: _selectedDate!),
     );
+    Navigator.pop(context);
   }
 
   @override
@@ -79,7 +93,14 @@ class _NewExpenseState extends State<NewExpense> {
             maxLength: 50,
             controller: _titleController,
             decoration: const InputDecoration(
-              label: Text('Title'),
+              label: Text(
+                'Title',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 35, 151, 240),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           Row(
@@ -90,7 +111,14 @@ class _NewExpenseState extends State<NewExpense> {
                   controller: _amountController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    label: Text('Amount'),
+                    label: Text(
+                      'Amount',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 35, 151, 240),
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     prefixText: '\$',
                   ),
                 ),
@@ -99,10 +127,17 @@ class _NewExpenseState extends State<NewExpense> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      _selectedDate == null
-                          ? 'No date selected'
-                          : formatter.format(_selectedDate!),
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No date selected'
+                            : formatter.format(_selectedDate!),
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 35, 151, 240),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                     IconButton(
                       onPressed: _presentDatePicker,
@@ -148,7 +183,10 @@ class _NewExpenseState extends State<NewExpense> {
                 ),
                 child: const Text(
                   'Cancel',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               ElevatedButton(
@@ -160,6 +198,7 @@ class _NewExpenseState extends State<NewExpense> {
                   'Save',
                   style: TextStyle(
                     color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
