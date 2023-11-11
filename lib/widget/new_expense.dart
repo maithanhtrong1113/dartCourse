@@ -84,127 +84,130 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            maxLength: 50,
-            controller: _titleController,
-            decoration: const InputDecoration(
-              label: Text(
-                'Title',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 35, 151, 240),
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextField(
+              maxLength: 50,
+              controller: _titleController,
+              decoration: const InputDecoration(
+                label: Text(
+                  'Title',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 35, 151, 240),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  maxLength: 20,
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    label: Text(
-                      'Amount',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 35, 151, 240),
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    prefixText: '\$',
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        _selectedDate == null
-                            ? 'No date selected'
-                            : formatter.format(_selectedDate!),
-                        style: const TextStyle(
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    maxLength: 20,
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      label: Text(
+                        'Amount',
+                        style: TextStyle(
                           color: Color.fromARGB(255, 35, 151, 240),
-                          fontSize: 18,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      prefixText: '\$',
                     ),
-                    IconButton(
-                      onPressed: _presentDatePicker,
-                      icon: const Icon(
-                        size: 26,
-                        Icons.calendar_month_outlined,
-                        color: Color.fromARGB(255, 35, 151, 240),
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          _selectedDate == null
+                              ? 'No date selected'
+                              : formatter.format(_selectedDate!),
+                          style: const TextStyle(
+                            color: Color.fromARGB(255, 35, 151, 240),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
-                      style: IconButton.styleFrom(),
+                      IconButton(
+                        onPressed: _presentDatePicker,
+                        icon: const Icon(
+                          size: 26,
+                          Icons.calendar_month_outlined,
+                          color: Color.fromARGB(255, 35, 151, 240),
+                        ),
+                        style: IconButton.styleFrom(),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+            DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(category.name.toUpperCase()),
+                      ),
                     )
-                  ],
-                ),
-              )
-            ],
-          ),
-          DropdownButton(
-              value: _selectedCategory,
-              items: Category.values
-                  .map(
-                    (category) => DropdownMenuItem(
-                      value: category,
-                      child: Text(category.name.toUpperCase()),
+                    .toList(),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.grey,
+                  ),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
-                  )
-                  .toList(),
-              onChanged: (value) {
-                if (value == null) {
-                  return;
-                }
-                setState(() {
-                  _selectedCategory = value;
-                });
-              }),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.grey,
-                ),
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              ElevatedButton(
-                onPressed: _submitExpenseData,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 35, 151, 240),
-                ),
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                ElevatedButton(
+                  onPressed: _submitExpenseData,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 35, 151, 240),
+                  ),
+                  child: const Text(
+                    'Save',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

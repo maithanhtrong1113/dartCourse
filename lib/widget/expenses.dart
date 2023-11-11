@@ -1,4 +1,6 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:frist_app/widget/chart/chart.dart';
 import 'package:frist_app/widget/expenses_list.dart';
 import 'package:frist_app/models/expense.dart';
 import 'package:frist_app/widget/new_expense.dart';
@@ -36,27 +38,100 @@ class _ExpensesState extends State<Expenses> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      // isScrollControlled: true,
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
   }
 
+  // void _changeTheme() {
+  //   AdaptiveTheme.of(context).toggleThemeMode();
+  // }
+
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(
+          'Expense deleted',
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget main = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Center(
+          child: Text(
+            'No expenses found. Start adding some!',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: Color.fromARGB(255, 35, 151, 240),
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 20),
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 35, 151, 240),
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            // onPressed: _openAddExpenseOverlay,
+            onPressed: _openAddExpenseOverlay,
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        )
+      ],
+    );
+    if (_registeredExpenses.isNotEmpty) {
+      main = ExpensesList(
+          expenses: _registeredExpenses, onRemoveExpanse: _removeExpense);
+    }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter ExpenseTracker'),
+          title: const Text(
+            'Flutter ExpenseTracker',
+            style: TextStyle(
+              color: Color.fromARGB(255, 35, 151, 240),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.add),
+              color: const Color.fromARGB(255, 35, 151, 240),
               onPressed: _openAddExpenseOverlay,
             )
           ],
         ),
         body: Column(children: [
+          Chart(expenses: _registeredExpenses),
           Expanded(
-            child: ExpensesList(expenses: _registeredExpenses),
+            child: main,
           ),
         ]),
       ),
