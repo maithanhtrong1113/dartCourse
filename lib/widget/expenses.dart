@@ -138,8 +138,8 @@ class _ExpensesState extends State<Expenses> {
               children: [
                 IconButton(
                   style: IconButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 35, 151, 240),
-                      elevation: 100),
+                    backgroundColor: const Color.fromARGB(255, 35, 151, 240),
+                  ),
                   icon: const Icon(
                     Icons.add,
                     size: 20,
