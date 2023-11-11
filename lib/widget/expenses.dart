@@ -1,9 +1,9 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:frist_app/widget/chart/chart.dart';
 import 'package:frist_app/widget/expenses_list.dart';
 import 'package:frist_app/models/expense.dart';
 import 'package:frist_app/widget/new_expense.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
@@ -27,6 +27,18 @@ class _ExpensesState extends State<Expenses> {
       amount: 15.69,
       date: DateTime.now(),
       category: Category.leisure,
+    ),
+    Expense(
+      title: 'Travel expense',
+      amount: 60,
+      date: DateTime.now(),
+      category: Category.travel,
+    ),
+    Expense(
+      title: 'Dinner',
+      amount: 10,
+      date: DateTime.now(),
+      category: Category.food,
     ),
   ];
 
@@ -121,14 +133,35 @@ class _ExpensesState extends State<Expenses> {
             ),
           ),
           actions: [
-            IconButton(
-              icon: const Icon(Icons.add),
-              color: const Color.fromARGB(255, 35, 151, 240),
-              onPressed: _openAddExpenseOverlay,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  style: IconButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 35, 151, 240),
+                      elevation: 100),
+                  icon: const Icon(
+                    Icons.add,
+                    size: 20,
+                  ),
+                  color: Colors.white,
+                  onPressed: _openAddExpenseOverlay,
+                ),
+                Switch(
+                  value: AdaptiveTheme.of(context).mode.isDark,
+                  onChanged: (value) {
+                    if (value) {
+                      AdaptiveTheme.of(context).setDark();
+                    } else {
+                      AdaptiveTheme.of(context).setLight();
+                    }
+                  },
+                ),
+              ],
             )
           ],
         ),
-        body: Column(children: [
+        body: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
           Chart(expenses: _registeredExpenses),
           Expanded(
             child: main,

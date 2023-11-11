@@ -42,11 +42,11 @@ class Chart extends StatelessWidget {
       width: double.infinity,
       height: 180,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
           colors: [
-            const Color.fromARGB(255, 35, 151, 240).withOpacity(0.3),
-            const Color.fromARGB(255, 12, 77, 128).withOpacity(0.0)
+            const Color.fromARGB(255, 135, 190, 233).withOpacity(0.5),
+            const Color.fromARGB(255, 27, 125, 199).withOpacity(0.3)
           ],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
