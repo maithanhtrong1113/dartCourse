@@ -5,7 +5,6 @@ class UIUpdatesDemo extends StatefulWidget {
 
   @override
   StatefulElement createElement() {
-    print('UIUpdatesDemo CREATEELEMENT called');
     return super.createElement();
   }
 
@@ -20,7 +19,6 @@ class _UIUpdatesDemo extends State<UIUpdatesDemo> {
 
   @override
   Widget build(BuildContext context) {
-    print('UIUpdatesDemo BUILD called');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
@@ -31,7 +29,9 @@ class _UIUpdatesDemo extends State<UIUpdatesDemo> {
             const Text(
               'Every Flutter developer should have a basic understanding of Flutter\'s internals!',
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 16),
             const Text(
@@ -48,7 +48,9 @@ class _UIUpdatesDemo extends State<UIUpdatesDemo> {
                       _isUnderstood = false;
                     });
                   },
-                  child: const Text('No'),
+                  child: const Text(
+                    'No',
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
