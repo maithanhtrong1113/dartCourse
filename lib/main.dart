@@ -1,10 +1,16 @@
 import 'package:frist_app/widget/expenses.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  // ]).then((fn) {
+  //   runApp(MyApp(savedThemeMode: savedThemeMode));
+  // });
   runApp(MyApp(savedThemeMode: savedThemeMode));
 }
 
