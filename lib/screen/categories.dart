@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:frist_app/screen/meals.dart';
+import 'package:frist_app/widgets/category_grid_item.dart';
+import 'package:frist_app/data/dummy_data.dart';
+
+class Categories extends StatelessWidget {
+  const Categories({super.key});
+  void _selectCategory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => const MealsScreen(
+          title: 'Some title',
+          meals: [],
+        ),
+      ),
+    ); // Navigator.push(context, route)
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Pick your category'),
+        ),
+        body: GridView(
+          padding: const EdgeInsets.all(15),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 3 / 2,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+          ),
+          children: [
+            for (final category in availableCategories)
+              CategoryGridItem(
+                category: category,
+                onSelectCategory: () {
+                  _selectCategory(context);
+                },
+              )
+          ],
+        ),
+      ),
+    );
+  }
+}
