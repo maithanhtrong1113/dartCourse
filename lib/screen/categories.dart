@@ -26,7 +26,13 @@ class Categories extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Pick your category'),
+          title: Text(
+            'Pick your category',
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
         body: GridView(
           padding: const EdgeInsets.all(15),
