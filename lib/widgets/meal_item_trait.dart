@@ -22,7 +22,7 @@ class MealItemTrait extends StatelessWidget {
       Text(
         label,
         style: const TextStyle(
-          fontSize: 18,
+          fontSize: 17,
           color: Colors.white,
         ),
       ),
