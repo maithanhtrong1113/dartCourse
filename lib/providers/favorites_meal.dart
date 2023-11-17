@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frist_app/models/meal.dart';
 
 class FavoriteMealsNotifier extends StateNotifier<List<Meal>> {
-  FavoriteMealsNotifier() : super([]);
+  FavoriteMealsNotifier() : super([]); // ham tao
 
   bool toggleMealFavoriteStatus(Meal meal) {
     final mealIsFavorite = state.contains(meal);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:frist_app/models/meal.dart';
 import 'package:frist_app/providers/favorites_meal.dart';
 
@@ -36,8 +35,11 @@ class MealDetailsScreen extends ConsumerWidget {
                   ),
                 );
               },
-              icon: const Icon(Icons.star),
-              color: Colors.amber,
+              icon: const Icon(Icons.favorite),
+              color: ref.watch(favoriteMealsProvider).contains(meal) == true
+                  ? const Color.fromARGB(255, 228, 94, 85)
+                  : Colors.white,
+              iconSize: 28,
             )
           ],
         ),
