@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frist_app/models/meal.dart';
-import 'package:frist_app/providers/favorites_meal.dart';
+import 'package:frist_app/providers/favorites_meal_provider.dart';
 
 class MealDetailsScreen extends ConsumerWidget {
   const MealDetailsScreen({
