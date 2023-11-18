@@ -35,7 +35,21 @@ class MealDetailsScreen extends ConsumerWidget {
                   ),
                 );
               },
-              icon: const Icon(Icons.favorite),
+              icon: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: ((child, animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                }),
+                child: Icon(
+                  Icons.favorite,
+                  key: ValueKey(
+                    ref.watch(favoriteMealsProvider).contains(meal),
+                  ),
+                ),
+              ),
               color: ref.watch(favoriteMealsProvider).contains(meal) == true
                   ? const Color.fromARGB(255, 228, 94, 85)
                   : Colors.white,
@@ -46,11 +60,14 @@ class MealDetailsScreen extends ConsumerWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Image.network(
-                meal.imageUrl,
-                height: 300,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              Hero(
+                tag: meal.id,
+                child: Image.network(
+                  meal.imageUrl,
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 14),
               Text(
