@@ -1,7 +1,8 @@
-import 'package:first_app/models/grocery_item.dart';
-import 'package:first_app/data/categories.dart';
+import 'package:frist_app/models/grocery_item.dart';
+import 'package:frist_app/data/categories.dart';
+import 'package:frist_app/models/category.dart';
 
-const groceryItems = [
+final groceryItems = [
   GroceryItem(
       id: 'a',
       name: 'Milk',
