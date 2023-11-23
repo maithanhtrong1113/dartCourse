@@ -39,8 +39,11 @@ class _GroceryListState extends State<GroceryList> {
           Container(
             margin: const EdgeInsets.only(top: 20),
             decoration: const BoxDecoration(
-                color: Colors.cyan,
-                borderRadius: BorderRadius.all(Radius.circular(40))),
+              color: Colors.cyan,
+              borderRadius: BorderRadius.all(
+                Radius.circular(40),
+              ),
+            ),
             child: IconButton(
               onPressed: _addItem,
               icon: const Icon(Icons.add),
