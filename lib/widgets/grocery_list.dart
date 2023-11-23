@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-// import 'package:frist_app/data/dummy_items.dart';
+import 'package:frist_app/data/categories.dart';
 import 'package:frist_app/models/grocery_item.dart';
 import 'package:frist_app/widgets/new_item.dart';
+import 'package:http/http.dart' as http;
 
 class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
@@ -11,7 +13,42 @@ class GroceryList extends StatefulWidget {
 }
 
 class _GroceryListState extends State<GroceryList> {
-  final List<GroceryItem> _groceryItems = [];
+  List<GroceryItem> _groceryItems = [];
+  var _isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    _loadItems();
+  }
+
+  void _loadItems() async {
+    final url = Uri.https(
+        'flutter-prep-79c0d-default-rtdb.firebaseio.com', 'shopping-list.json');
+    final response = await http.get(url);
+    final Map<String, dynamic> listData = jsonDecode(response.body);
+    List<GroceryItem> loadedItems = [];
+
+    for (var item in listData.entries) {
+      final category = categories.entries.firstWhere(
+        (catItem) => catItem.value.title == item.value['category'],
+      ); // loc theo dieu kien(lay element dau tien khop dieu kien)
+
+      loadedItems.add(
+        GroceryItem(
+          id: item.key,
+          name: item.value['name'],
+          quantity: item.value['quantity'],
+          category: category.value,
+        ),
+      );
+    }
+    setState(
+      () {
+        _groceryItems = loadedItems;
+        _isLoading = false;
+      },
+    );
+  }
 
   void _addItem() async {
     final newItem = await Navigator.of(context).push<GroceryItem>(
@@ -25,6 +62,14 @@ class _GroceryListState extends State<GroceryList> {
     setState(
       () {
         _groceryItems.add(newItem);
+      },
+    );
+  }
+
+  void _removeItem(GroceryItem item) {
+    setState(
+      () {
+        _groceryItems.remove(item);
       },
     );
   }
@@ -52,23 +97,31 @@ class _GroceryListState extends State<GroceryList> {
         ],
       ),
     );
-
+    if (_isLoading) {
+      content = const Center(
+        child: CircularProgressIndicator(),
+      );
+    } // animate loading
     if (_groceryItems.isNotEmpty) {
       content = ListView.builder(
         itemCount: _groceryItems.length,
-        itemBuilder: (ctx, index) => ListTile(
-          leading: Container(
-            width: 30,
-            height: 30,
-            color: _groceryItems[index].category.color,
-          ),
-          title: Text(
-            _groceryItems[index].name,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          trailing: Text(
-            _groceryItems[index].quantity.toString(),
-            style: Theme.of(context).textTheme.bodyLarge,
+        itemBuilder: (ctx, index) => Dismissible(
+          onDismissed: (direction) => _removeItem,
+          key: ValueKey(_groceryItems[index].id),
+          child: ListTile(
+            leading: Container(
+              width: 30,
+              height: 30,
+              color: _groceryItems[index].category.color,
+            ),
+            title: Text(
+              _groceryItems[index].name,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            trailing: Text(
+              _groceryItems[index].quantity.toString(),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ),
       );
