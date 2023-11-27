@@ -12,6 +12,7 @@ class ImageInput extends StatefulWidget {
 
 class _ImageInputState extends State<ImageInput> {
   File? _selectedImage;
+
   void _takePicture() async {
     final imagePicker = ImagePicker();
     final pickedImage =
