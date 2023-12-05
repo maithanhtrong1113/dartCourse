@@ -99,36 +99,39 @@ class _LocationInputState extends State<LocationInput> {
       previewContent = const CircularProgressIndicator();
     }
 
-    return Column(
-      children: [
-        Container(
-          height: 170,
-          width: double.infinity,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: Column(
+        children: [
+          Container(
+            height: 170,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1,
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+              ),
             ),
+            child: previewContent,
           ),
-          child: previewContent,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextButton.icon(
-              icon: const Icon(Icons.location_on),
-              label: const Text('Get Current Location'),
-              onPressed: _getCurrentLocation,
-            ),
-            TextButton.icon(
-              icon: const Icon(Icons.map),
-              label: const Text('Select on Map'),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton.icon(
+                icon: const Icon(Icons.location_on),
+                label: const Text('Get Current Location'),
+                onPressed: _getCurrentLocation,
+              ),
+              TextButton.icon(
+                icon: const Icon(Icons.map),
+                label: const Text('Select on Map'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
