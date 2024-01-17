@@ -28,6 +28,7 @@ class PlacesList extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.add),
+              color: Colors.white,
             )
           ],
         ),

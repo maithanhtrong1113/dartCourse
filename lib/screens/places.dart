@@ -23,6 +23,9 @@ class Places extends ConsumerWidget {
                 );
               },
               icon: const Icon(Icons.add),
+              // style: IconButton.styleFrom(
+              //   backgroundColor: Colors.white,
+              // ),
             )
           ],
         ),
